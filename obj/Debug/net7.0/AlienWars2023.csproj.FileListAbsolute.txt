@@ -1,0 +1,15 @@
+C:\Users\User\repos\Newton\AlienWars2023\bin\Debug\net7.0\AlienWars2023.exe
+C:\Users\User\repos\Newton\AlienWars2023\bin\Debug\net7.0\AlienWars2023.deps.json
+C:\Users\User\repos\Newton\AlienWars2023\bin\Debug\net7.0\AlienWars2023.runtimeconfig.json
+C:\Users\User\repos\Newton\AlienWars2023\bin\Debug\net7.0\AlienWars2023.dll
+C:\Users\User\repos\Newton\AlienWars2023\bin\Debug\net7.0\AlienWars2023.pdb
+C:\Users\User\repos\Newton\AlienWars2023\obj\Debug\net7.0\AlienWars2023.csproj.AssemblyReference.cache
+C:\Users\User\repos\Newton\AlienWars2023\obj\Debug\net7.0\AlienWars2023.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\User\repos\Newton\AlienWars2023\obj\Debug\net7.0\AlienWars2023.AssemblyInfoInputs.cache
+C:\Users\User\repos\Newton\AlienWars2023\obj\Debug\net7.0\AlienWars2023.AssemblyInfo.cs
+C:\Users\User\repos\Newton\AlienWars2023\obj\Debug\net7.0\AlienWars2023.csproj.CoreCompileInputs.cache
+C:\Users\User\repos\Newton\AlienWars2023\obj\Debug\net7.0\AlienWars2023.dll
+C:\Users\User\repos\Newton\AlienWars2023\obj\Debug\net7.0\refint\AlienWars2023.dll
+C:\Users\User\repos\Newton\AlienWars2023\obj\Debug\net7.0\AlienWars2023.pdb
+C:\Users\User\repos\Newton\AlienWars2023\obj\Debug\net7.0\AlienWars2023.genruntimeconfig.cache
+C:\Users\User\repos\Newton\AlienWars2023\obj\Debug\net7.0\ref\AlienWars2023.dll
