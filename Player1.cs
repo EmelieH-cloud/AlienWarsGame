@@ -2,7 +2,12 @@
 {
     internal class Player1
     {
-        public int Health { get; set; } = 50;
+        public int Health { get; set; }
 
+        public Player1(int h)
+        {
+            Health = h;
+
+        }
     }
 }

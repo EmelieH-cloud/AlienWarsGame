@@ -2,6 +2,16 @@
 {
     internal class AlienShip
     {
-        public int Health { get; set; } = 50;
+        public int Life { get; set; }
+        public int Meters { get; set; }
+
+        public AlienShip(int l, int meters)
+        {
+            Life = l;
+            Meters = meters;
+
+        }
+
     }
+
 }

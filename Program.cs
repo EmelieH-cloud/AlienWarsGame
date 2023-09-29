@@ -1,23 +1,12 @@
-﻿/*
-Classes:
-FirstHunter
-SecondHunter
-ThirdHunter
-Alienship: int size 
-Weapon
+﻿
 
-Logic:
-Three difficulty levels, the higher the level, the more important
-the choice of weapon + alienship will become. 
-
-Decision-making:
-Each spaceship will be presented with randomly generated facts.  
-
- */
+using AlienWars2023;
 
 Welcome();
-
-
+Console.Clear();
+ShowMenu();
+ShowAlien();
+AlienShip();
 
 
 void Welcome()
@@ -89,54 +78,106 @@ void Welcome()
         answer = Console.ReadLine();
     }
 
-    Console.Clear();
-    ShowMenu();
 
 }
 
 void ShowMenu()
 {
-    bool isNotChosen = false;
-    while (!isNotChosen)
+    bool isNotChosen = true;
+    while (isNotChosen)
     {
         Console.WriteLine("Press e for easy, press m for medium, press h for hard");
         ConsoleKeyInfo keyInfo = Console.ReadKey();
+        Drawing d = new Drawing();
 
         if (keyInfo.Key == ConsoleKey.E)
         {
             Console.Clear();
-            DrawEasy();
-            isNotChosen = true;
+            d.DrawEasy();
+            isNotChosen = false;
         }
         else if (keyInfo.Key == ConsoleKey.M)
         {
             Console.Clear();
-            DrawMedium();
-            isNotChosen = true;
+            d.DrawMedium();
+            isNotChosen = false;
         }
         else if (keyInfo.Key == ConsoleKey.H)
         {
             Console.Clear();
-            DrawHard();
-            isNotChosen = true;
+            d.DrawHard();
+            isNotChosen = false;
         }
+    }
+    Player1 p = new Player1(50);
+    PressAnyKey(p);
+}
+
+void PressAnyKey(Player1 player)
+{
+    Console.WriteLine("\n\nPress any key to use the telescope to look for aliens");
+    Console.ReadKey();
+    Console.Clear();
+}
+
+void AlienShip()
+{
+    Random random = new Random();
+    int size = random.Next(1, 11);
+    AlienShip a = new AlienShip(50, size);
+    Console.WriteLine("Size of alienship: " + size + " meters");
+    Console.WriteLine("Quick! choose a weapon! Do you need precision (press 'p') or speed (press 's')\n");
+    Console.ForegroundColor = ConsoleColor.Red;
+    Console.WriteLine("  TAKE NOTE: small spaceships (< 5 meters) move slower than big ones! ");
+    Console.ResetColor();
+
+    string res = Console.ReadLine();
+
+    if (res.Equals("p") || res.Equals("P"))
+    {
+        Weapon weapon_precision = new Weapon(10, 2);
+        CalculateDamage(weapon_precision, size, a);
+
+    }
+    else if (res.Equals("s") || res.Equals("S"))
+    {
+        Weapon weapon_speed = new Weapon(2, 10);
+        CalculateDamage(weapon_speed, size, a);
+
     }
 
 }
 
-void DrawEasy()
+void CalculateDamage(Weapon w, int m, AlienShip alien)
 {
-    Console.Write("\n  ////^\\\\\\\\\r\n      | ^   ^ |\r\n     @ (o) (o) @\r\n      |   <   |\r\n      |  ___  |\r\n       \\_____/\r\n     ____|  |____\r\n    /    \\__/    \\\r\n   /              \\\r\n  /\\_/|        |\\_/\\\r\n / /  |        |  \\ \\\r\n( <   |        |   > )\r\n \\ \\  |        |  / /\r\n  \\ \\ |________| / /\r\n   \\ \\|");
+    int speed = w.Speed;
+    int precise = w.Precision;
+
+    if (m < 5 && precise > speed)   // causes high damage 
+    {
+        alien.Life = alien.Life - 10;
+    }
+    else if (m < 5 && speed > precise)  // causes low damage 
+    {
+        alien.Life = alien.Life - 5;
+    }
+    else if (m >= 5 && speed > precise) // causes high damage 
+    {
+        alien.Life = alien.Life - 10;
+    }
+    else if (m >= 5 && precise > speed) // causes low damage 
+    {
+        alien.Life = alien.Life - 5;
+    }
+    Console.WriteLine("Health of the alienship is now: " + alien.Life);
 }
 
-void DrawMedium()
+void ShowAlien()
 {
-    Console.Write("\n  .-\"\"-.\r\n      /-.{}  \\\r\n      | _\\__.|\r\n      \\/^)^ \\/\r\n       \\ =  /\r\n  .---./`--`\\.--._\r\n /     `;--'`     \\\r\n;        /`       ;\r\n|       |*        |\r\n/   |   |     |    \\\r\n|    \\  |*    /    |\r\n\\_   |\\_|____/|  __/\r\n  \\__//======\\\\__/\r\n  / //_      _\\\\ \\\r\n  -'  |`\"\"\"\"`|  `-\r\n      |  L   |\r\n      >_ || _<\r\n      |  ||  |\r\n      |  ||  |\r\n     /   ||   \\\r\n    /    /,    \\\r\n     `|\"|`\"|\"|\"`\r\n     /  )  /  )         \r\n    /__/  /__/");
+    Console.WriteLine("       `. ___\r\n                    __,' __`.                _..----....____\r\n        __...--.'``;.   ,.   ;``--..__     .'    ,-._    _.-'\r\n  _..-''-------'   `'   `'   `'     O ``-''._   (,;') _,'\r\n,'________________                          \\`-._`-','\r\n `._              ```````````------...___   '-.._'-:\r\n    ```--.._      ,.                     ````--...__\\-.\r\n            `.--. `-`                       ____    |  |`\r\n              `. `.                       ,'`````.  ;  ;`\r\n                `._`.        __________   `.      \\'__/`\r\n                   `-:._____/______/___/____`.     \\  `\r\n                               |       `._    `.    \\\r\n                               `._________`-.   `.   `.___\r\n                                             SSt  `------'`");
+
 }
 
-void DrawHard()
-{
-    Console.Write("\n         \r\n                 #_   _#\r\n                 |a` `a|\r\n                 |  u  |\r\n                 \\  =  /\r\n                 |\\___/|\r\n        ___ ____/:     :\\____ ___\r\n      .'   `.-===-\\   /-===-.`   '.\r\n     /      .-\"\"\"\"\"-.-\"\"\"\"\"-.      \\\r\n    /'             =:=             '\\\r\n  .'  ' .:    o   -=:=-   o    :. '  `.\r\n  (.'   /'. '-.....-'-.....-' .'\\   '.)\r\n  /' ._/   \".     --:--     .\"   \\_. '\\\r\n |  .'|      \".  ---:---  .\"      |'.  |\r\n |  : |       |  ---:---  |       | :  |\r\n  \\ : |       |_____._____|       | : /\r\n  /   (       |----|------|       )   \\\r\n /... .|      |    |      |      |. ...\\\r\n|::::/''     /     |       \\     ''\\::::|\r\n'\"\"\"\"       /'    .L_      `\\       \"\"\"\"'\r\n           /'-.,__/` `\\__..-'\\\r\n          ;      /     \\      ;\r\n          :     /       \\     |\r\n          |    /         \\.   |\r\n          |`../           |  ,/\r\n          ( _ )           |  _)\r\n          |   |           |   |\r\n          |___|           \\___|\r\n          :===|            |==|\r\n           \\  /            |__|\r\n           /\\/\\           /\"\"\"`8.__\r\n           |oo|           \\__.//___)\r\n           |==|\r\n           \\__/");
-}
+
 
 
