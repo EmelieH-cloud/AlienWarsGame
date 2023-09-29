@@ -2,12 +2,10 @@
 {
     internal class AlienShip
     {
-        public int Life { get; set; }
         public int Meters { get; set; }
 
-        public AlienShip(int l, int meters)
+        public AlienShip(int meters)
         {
-            Life = l;
             Meters = meters;
 
         }

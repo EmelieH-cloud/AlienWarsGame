@@ -6,7 +6,8 @@ Welcome();
 Console.Clear();
 ShowMenu();
 ShowAlien();
-AlienShip();
+CalculateDamage();
+
 
 
 void Welcome()
@@ -120,56 +121,73 @@ void PressAnyKey(Player1 player)
     Console.Clear();
 }
 
-void AlienShip()
+AlienShip GetAlienShip()
 {
     Random random = new Random();
-    int size = random.Next(1, 11);
-    AlienShip a = new AlienShip(50, size);
-    Console.WriteLine("Size of alienship: " + size + " meters");
+    int s = random.Next(1, 11);
+    AlienShip a = new AlienShip(s);
+    Console.ForegroundColor = ConsoleColor.Yellow;
+    Console.WriteLine("Length of spaceship: " + s + " meters");
+    Console.ResetColor();
+    return a;
+}
+
+Weapon GetWeapon()
+{
     Console.WriteLine("Quick! choose a weapon! Do you need precision (press 'p') or speed (press 's')\n");
     Console.ForegroundColor = ConsoleColor.Red;
     Console.WriteLine("  TAKE NOTE: small spaceships (< 5 meters) move slower than big ones! ");
     Console.ResetColor();
 
     string res = Console.ReadLine();
-
     if (res.Equals("p") || res.Equals("P"))
     {
-        Weapon weapon_precision = new Weapon(10, 2);
-        CalculateDamage(weapon_precision, size, a);
+        Weapon weapon = new Weapon(10, 2);
+        return weapon;
 
     }
     else if (res.Equals("s") || res.Equals("S"))
     {
-        Weapon weapon_speed = new Weapon(2, 10);
-        CalculateDamage(weapon_speed, size, a);
-
+        Weapon weapon = new Weapon(2, 10);
+        return weapon;
     }
 
+    return null;
 }
 
-void CalculateDamage(Weapon w, int m, AlienShip alien)
+void CalculateDamage()
 {
-    int speed = w.Speed;
-    int precise = w.Precision;
+    int alienHealth = 50;
 
-    if (m < 5 && precise > speed)   // causes high damage 
+    while (alienHealth > 0)
     {
-        alien.Life = alien.Life - 10;
+        AlienShip ship = GetAlienShip();
+        Weapon weapon = GetWeapon();
+
+        int m = ship.Meters;
+        int precise = weapon.Precision;
+        int speed = weapon.Speed;
+        int largeDamage = 10;
+        int smallDamage = 5;
+
+        if (m < 5 && precise > speed)   // causes high damage 
+        {
+            alienHealth = alienHealth - largeDamage;
+        }
+        else if (m < 5 && speed > precise)  // causes low damage 
+        {
+            alienHealth = alienHealth - smallDamage;
+        }
+        else if (m >= 5 && speed > precise) // causes high damage 
+        {
+            alienHealth = alienHealth - largeDamage;
+        }
+        else if (m >= 5 && precise > speed) // causes low damage 
+        {
+            alienHealth = alienHealth - smallDamage;
+        }
+        Console.WriteLine("Health of the alienship is now: " + alienHealth);
     }
-    else if (m < 5 && speed > precise)  // causes low damage 
-    {
-        alien.Life = alien.Life - 5;
-    }
-    else if (m >= 5 && speed > precise) // causes high damage 
-    {
-        alien.Life = alien.Life - 10;
-    }
-    else if (m >= 5 && precise > speed) // causes low damage 
-    {
-        alien.Life = alien.Life - 5;
-    }
-    Console.WriteLine("Health of the alienship is now: " + alien.Life);
 }
 
 void ShowAlien()
